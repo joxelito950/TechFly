@@ -12,23 +12,23 @@ import java.util.Calendar;
  * @author jose-
  */
 public class Reserva {
-    private String idVuelo;
+    private Vuelo vuelo;
     private String idCliente;
-    private Calendar ultimaReserva;
+    private Calendar reserva;
     private Reserva sigReserva;
 
-    public Reserva(String idVuelo,String idCliente) {
-        this.idVuelo = idVuelo;
+    public Reserva(Vuelo vuelo,String idCliente) {
+        this.vuelo = vuelo;
         this.idCliente = idCliente;
-        this.ultimaReserva = Calendar.getInstance();
+        this.reserva = Calendar.getInstance();
     }
 
-    public String getIdVuelo() {
-        return idVuelo;
+    public Vuelo getVuelo() {
+        return vuelo;
     }
 
-    public void setIdVuelo(String idVuelo) {
-        this.idVuelo = idVuelo;
+    public void setVuelo(Vuelo vuelo) {
+        this.vuelo = vuelo;
     }
 
     public String getIdCliente() {
@@ -39,8 +39,8 @@ public class Reserva {
         this.idCliente = idCliente;
     }
 
-    public Calendar getUltimaReserva() {
-        return ultimaReserva;
+    public Calendar getTime() {
+        return reserva;
     }
 
     public Reserva getSigReserva() {

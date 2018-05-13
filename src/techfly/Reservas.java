@@ -25,16 +25,11 @@ public class Reservas extends JFrame implements ActionListener {
      
      public Reservas(){
         listadoReservas = null;
-        JLabel text= new JLabel();
-        JLabel text1= new JLabel();
-        JButton cancelar = new JButton();
-        JButton reserva = new JButton();
-        JCheckBox mayorEdad = new JCheckBox();
         boolean reservar = false;
      }
      
-     public void agregarReserva(String idVuelo,String idCliente){
-         Reserva nuevo = new Reserva(idVuelo,idCliente);
+     public void agregarReserva(Vuelo vuelo,String idCliente){
+         Reserva nuevo = new Reserva(vuelo,idCliente);
          if(listadoReservas!=null)
             nuevo.setSigReserva(listadoReservas);
          listadoReservas=nuevo;
@@ -44,8 +39,14 @@ public class Reservas extends JFrame implements ActionListener {
          return listadoReservas;
      }
      
-     public void reserva(String cedula, String vuelo){
+     public void reserva(String cedula, Vuelo vuelo){
         reservar=false;
+        
+        JLabel text= new JLabel();
+        JLabel text1= new JLabel();
+        JButton cancelar = new JButton();
+        JButton reserva = new JButton();
+        JCheckBox mayorEdad = new JCheckBox();
         //setBounds
         this.setBounds(100, 300, 600, 150);
         text.setBounds(10,5,500,22);
@@ -54,7 +55,7 @@ public class Reservas extends JFrame implements ActionListener {
         reserva.setBounds(145, 90, 90, 22);
         //setInformation
         this.setTitle("Reserva para " + cedula);
-        text.setText(vuelo);
+        text.setText(vuelo.datosVuelo());
         mayorEdad.setText("Soy Mayor de Edad");
         cancelar.setText("Cancelar");
         reserva.setText("reservar");
@@ -76,8 +77,6 @@ public class Reservas extends JFrame implements ActionListener {
         mayorEdad.addActionListener(this);
         cancelar.addActionListener(this);
         reserva.addActionListener(this);
-        if(reservar==true)
-            agregarReserva(vuelo,cedula);
     }
 
     

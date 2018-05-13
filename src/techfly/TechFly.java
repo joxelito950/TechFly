@@ -14,9 +14,11 @@ public class TechFly{
     /**
      * @param args the command line arguments
      */
-    static Vuelos listaVuelos = new Vuelos();
-    static Reservas listaReservas = new Reservas();
-    static Ventana panel = new Ventana();
+    private static Vuelos listaVuelos = new Vuelos();
+    private static Reservas listaReservas = new Reservas();
+    private static Principal consultaVuelos = new Principal();
+    private static VentanaReservas consultaReservas = new VentanaReservas();
+    
     public static Vuelos getListaVuelos() {
         return listaVuelos;
     }
@@ -24,19 +26,24 @@ public class TechFly{
     public static Reservas getListaReservas() {
         return listaReservas;
     }
-    public static void consulta(){
-        panel.consulta(listaVuelos);
+    
+    public static void consultarVuelos(){
+        consultaVuelos.consulta(listaVuelos);
     }
     
+    public static void consultarReservas(){
+        consultaReservas.ConsultaReservas(listaReservas);
+    }
     public static void inicializarVuelos(){
         Calendar fecha=Calendar.getInstance();
         String id,origen,destino;
-        for(int i=0;i<fecha.get(Calendar.DAY_OF_YEAR);i++){
+        for(int i=0;i<11;i++){
+            fecha.set(Calendar.DATE,(Calendar.DATE + i));
             if(i%2!=0)
-                id="TNF"+fecha.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+                id="AV"+fecha.get(Calendar.DAY_OF_WEEK_IN_MONTH);
             else
-                id="RCT"+fecha.get(Calendar.DAY_OF_MONTH);
-            switch (fecha.get(Calendar.DAY_OF_WEEK)){
+                id="VC"+fecha.get(Calendar.DAY_OF_MONTH);
+            switch (i){
                 case 1:
                     origen="Panama";
                     destino="Medellin";
@@ -72,6 +79,21 @@ public class TechFly{
                     destino="Medellin";
                     id+="MEME";
                     break;
+                case 8:
+                    origen="Barranquilla";
+                    destino="Bogotá";
+                    id+="BABOG";
+                    break;
+                case 9:
+                    origen="Bucaramanga";
+                    destino="Cali";
+                    id+="BUCA";
+                    break;
+                case 10:
+                    origen="Cartagena";
+                    destino="Manizales";
+                    id+="CARMA";
+                    break;
                 default:
                     origen="Venezuela";
                     destino="Medellin";
@@ -84,7 +106,7 @@ public class TechFly{
     
     public static void main(String args[]) {
         inicializarVuelos();
-        consulta();
+        consultarVuelos();
     }
     
 }
