@@ -51,7 +51,7 @@ public class Vuelo {
     
     public String datosVuelo(){
         String datos="";
-        datos+="ID "+id+", Origen "+origen+", Destino "+destino+", Salida "+fecha+".";
+        datos+="ID "+id+", Origen "+origen+", Destino "+destino+", Salida "+fecha.getTime()+".";
         return datos;
     }
 }

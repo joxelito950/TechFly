@@ -49,11 +49,17 @@ public class Vuelos extends JFrame implements ActionListener{
         text.setText("Sus vuelos reservados");
         listado.removeAllItems();
         Calendar fecha = Calendar.getInstance();
-        Vuelo recorre=listadoVuelos;
-        while(recorre!=null){
-            if(recorre.getId().equals(buscarConCedula.getText()) && recorre.getFecha().get(Calendar.DAY_OF_MONTH)>fecha.get(Calendar.DAY_OF_MONTH))
-                listado.addItem(recorre.datosVuelo());
-            recorre = recorre.getProximo();
+        Reserva recorreR=lista.getInicio();
+        Vuelo recorreV=listadoVuelos;
+        while(recorreR!=null){
+            if(recorreR.getIdCliente().equals(buscarConCedula.getText()) && recorreV.getFecha().get(Calendar.DAY_OF_MONTH)>=fecha.get(Calendar.DAY_OF_MONTH)){
+                while(recorreV!=null){
+                    if(recorreR.getIdVuelo().equals(recorreV.getId()) && recorreV.getFecha().get(Calendar.DAY_OF_MONTH)>=fecha.get(Calendar.DAY_OF_MONTH))
+                        listado.addItem(recorreV.datosVuelo());
+                    recorreV=recorreV.getProximo();
+                }
+            recorreR = recorreR.getSigReserva();
+            }
         }
         text1.setText("Ingrese otro documento");
         buscarConCedula.setText("");
@@ -75,7 +81,7 @@ public class Vuelos extends JFrame implements ActionListener{
         buscarConCedula.addActionListener(this);
         consulta.addActionListener(this);
     }    
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {     
         if(e.getSource()==consulta){
