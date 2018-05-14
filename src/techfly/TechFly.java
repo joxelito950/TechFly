@@ -66,7 +66,7 @@ public class TechFly{
                     id+="CBOG";
                     break;
                 case 4:
-                    origen="BOGOTA";
+                    origen="Bogota";
                     destino="Medellin";
                     id+="BOGME";
                     break;
@@ -87,7 +87,7 @@ public class TechFly{
                     break;
                 case 8:
                     origen="Barranquilla";
-                    destino="Bogotá";
+                    destino="Bogota";
                     id+="BABOG";
                     break;
                 case 9:

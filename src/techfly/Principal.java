@@ -17,12 +17,12 @@ import javax.swing.*;
 
 public class Principal extends JFrame implements ActionListener{
     private JLabel text= new JLabel();
+    private JLabel text1= new JLabel();
     private JComboBox listado = new JComboBox();
     private JButton consulta = new JButton();
     private JButton cerrar = new JButton();
     private JTextField cedula=new JTextField("");
     private JButton reserva= new JButton();
-    private JButton volver = new JButton();
 
     public Principal(){
         this.setLayout(null);
@@ -30,13 +30,14 @@ public class Principal extends JFrame implements ActionListener{
     
     public void consulta(Vuelos lista){
         //setBounds
-        this.setBounds(300, 350, 330, 180);
+        this.setBounds(300, 350, 340, 160);
         text.setBounds(10,5,200,22);
-        listado.setBounds(10, 25, 280, 22);
-        cedula.setBounds(10, 55, 100, 22);
-        consulta.setBounds(10, 100, 89,22);
-        reserva.setBounds(100, 100, 89, 22);
-        cerrar.setBounds(200,100,80,22);
+        listado.setBounds(10, 25, 300, 22);
+        text1.setBounds(20,55,50,22);
+        cedula.setBounds(62, 55, 100, 22);
+        consulta.setBounds(10, 85, 120,22);
+        reserva.setBounds(135, 85, 89, 22);
+        cerrar.setBounds(230,85,80,22);
         //setInformation
         this.setTitle("Vuelos");
         text.setText("Vuelos Disponibles");
@@ -47,13 +48,15 @@ public class Principal extends JFrame implements ActionListener{
                 listado.addItem(recorre.datosVuelo());
             recorre = recorre.getProximo();
         }
-        cedula.setText("Cedula");
-        consulta.setText("Consultar");
+        text1.setText("Cedula");
+        cedula.setText("");
+        consulta.setText("Mis Reservas");
         reserva.setText("Reservar");
         cerrar.setText("Cerrar");
         //addThis
         this.add(text);
         this.add(listado);
+        this.add(text1);
         this.add(cedula);
         this.add(consulta);
         this.add(reserva);
@@ -61,6 +64,7 @@ public class Principal extends JFrame implements ActionListener{
         //changeVisible
         text.setVisible(true);
         listado.setVisible(true);
+        text1.setVisible(true);
         cedula.setVisible(true);
         consulta.setVisible(true);
         reserva.setVisible(true);
@@ -94,8 +98,6 @@ public class Principal extends JFrame implements ActionListener{
                 this.dispose();
             }
         }
-        if(e.getSource()==volver)
-            TechFly.consultarVuelos();
         if(e.getSource()==cerrar)
             this.dispose();
     }   
