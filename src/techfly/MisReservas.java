@@ -70,14 +70,13 @@ public class MisReservas extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {     
         if(e.getSource()==consulta){
-            
             if(buscarConCedula.getText().equals("")){
                 this.dispose();
                 TechFly.consultarVuelos();
             }
             else{
                 this.dispose();
-                ConsultaReservas(TechFly.getListaReservas());
+                TechFly.consultarReservas(buscarConCedula.getText());
             }
         }
     }
