@@ -24,7 +24,7 @@ public class Principal extends JFrame implements ActionListener{
     private JButton reserva= new JButton();
 
     public Principal(){
-        setLayout(null);
+        this.setLayout(null);
     }
     
     public void consulta(Vuelos lista){
@@ -40,7 +40,7 @@ public class Principal extends JFrame implements ActionListener{
         this.setTitle("Vuelos");
         text.setText("Vuelos Disponibles");
         Calendar fecha = Calendar.getInstance();
-        Vuelo recorre=lista.getListadoVuelos();
+        Vuelo recorre=lista.getInicio();
         while(recorre!=null){
             if(recorre.getFecha().get(Calendar.DAY_OF_MONTH)>=fecha.get(Calendar.DAY_OF_MONTH))
                 listado.addItem(recorre.datosVuelo());
@@ -77,20 +77,24 @@ public class Principal extends JFrame implements ActionListener{
         if(e.getSource()==reserva){
             if(cedula.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Debe ingresar una cedula");
+                this.dispose();
                 TechFly.consultarVuelos();
             }
             else{
-                TechFly.getListaReservas().reserva(cedula.getText(), TechFly.getListaVuelos().buscarVuelo(listado.getSelectedItem().toString()));
+                this.dispose();
+                TechFly.reservar(cedula.getText(), TechFly.getListaVuelos().buscarVuelo(listado.getSelectedItem().toString()));
             }
         }
         
         if(e.getSource()==consulta){
             if(cedula.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Debe ingresar una cedula");
+                this.dispose();
                 TechFly.consultarVuelos();
             }
             else{
-                TechFly.consultarReservas();
+                TechFly.consultarReservas(cedula.getText());
+                this.dispose();
             }
         }
     }   

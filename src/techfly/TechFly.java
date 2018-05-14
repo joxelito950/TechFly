@@ -17,7 +17,8 @@ public class TechFly{
     private static Vuelos listaVuelos = new Vuelos();
     private static Reservas listaReservas = new Reservas();
     private static Principal consultaVuelos = new Principal();
-    private static VentanaReservas consultaReservas = new VentanaReservas();
+    private static MisReservas consultaReservas = new MisReservas();
+    private static ConfirmarReserva reservar =new ConfirmarReserva();
     
     public static Vuelos getListaVuelos() {
         return listaVuelos;
@@ -31,9 +32,14 @@ public class TechFly{
         consultaVuelos.consulta(listaVuelos);
     }
     
-    public static void consultarReservas(){
-        consultaReservas.ConsultaReservas(listaReservas);
+    public static void consultarReservas(String cedula){
+        consultaReservas.ConsultaReservas(listaReservas.buscarReservas(cedula));
     }
+    
+    public static void reservar(String cedula,Vuelo vuelo){
+        reservar.reserva(cedula, vuelo);
+    }
+    
     public static void inicializarVuelos(){
         Calendar fecha=Calendar.getInstance();
         String id,origen,destino;

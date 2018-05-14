@@ -21,7 +21,7 @@ public class Vuelos{
         listadoVuelos=null;
     }
 
-    public Vuelo getListadoVuelos() {
+    public Vuelo getInicio() {
         return listadoVuelos;
     }
     
@@ -31,7 +31,7 @@ public class Vuelos{
            nuevo.setProximo(listadoVuelos);
        listadoVuelos=nuevo;
     }
-    
+     
     public Vuelo buscarVuelo(String datos){
         Vuelo recorre=listadoVuelos;
         while(recorre!=null){
