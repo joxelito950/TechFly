@@ -20,6 +20,7 @@ public class Principal extends JFrame implements ActionListener{
     private JLabel text1= new JLabel();
     private JComboBox listado = new JComboBox();
     private JButton consulta = new JButton();
+    private JButton cerrar = new JButton();
     private JTextField cedula=new JTextField("");
     private JButton reserva= new JButton();
 
@@ -34,8 +35,9 @@ public class Principal extends JFrame implements ActionListener{
         listado.setBounds(10, 25, 220, 22);
         text1.setBounds(10,55,220,22);
         cedula.setBounds(10, 75, 100, 22);
-        consulta.setBounds(15, 110, 85,22);
-        reserva.setBounds(105, 110, 85, 22);
+        consulta.setBounds(15, 110, 89,22);
+        reserva.setBounds(105, 110, 89, 22);
+        cerrar.setBounds(150,110,89,22);
         //setInformation
         this.setTitle("Vuelos");
         text.setText("Vuelos Disponibles");
@@ -50,6 +52,7 @@ public class Principal extends JFrame implements ActionListener{
         cedula.setText("");
         consulta.setText("Consultar");
         reserva.setText("Reservar");
+        cerrar.setText("Cerrar");
         //addThis
         this.add(text);
         this.add(listado);
@@ -57,6 +60,7 @@ public class Principal extends JFrame implements ActionListener{
         this.add(cedula);
         this.add(consulta);
         this.add(reserva);
+        this.add(cerrar);
         //changeVisible
         text.setVisible(true);
         listado.setVisible(true);
@@ -64,11 +68,13 @@ public class Principal extends JFrame implements ActionListener{
         cedula.setVisible(true);
         consulta.setVisible(true);
         reserva.setVisible(true);
+        cerrar.setVisible(true);
         this.setVisible(true);
         //action
         cedula.addActionListener(this);
         consulta.addActionListener(this);
         reserva.addActionListener(this);
+        cerrar.addActionListener(this);
     }
           
     @Override
@@ -97,5 +103,7 @@ public class Principal extends JFrame implements ActionListener{
                 this.dispose();
             }
         }
+        if(e.getSource()==cerrar)
+            this.dispose();
     }   
 }
