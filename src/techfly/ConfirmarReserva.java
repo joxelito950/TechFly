@@ -18,6 +18,8 @@ public class ConfirmarReserva extends JFrame implements ActionListener{
     private JCheckBox mayorEdad = new JCheckBox();
     private JButton cancelar = new JButton();
     private JButton reserva = new JButton();
+    private String ced;
+    private Vuelo vuelo;
     
     public ConfirmarReserva(){
         this.setLayout(null);
@@ -25,25 +27,30 @@ public class ConfirmarReserva extends JFrame implements ActionListener{
     
     public void reserva(String cedula, Vuelo vuelo){
         //setBounds
-        this.setBounds(100, 300, 600, 150);
-        text.setBounds(10,5,500,22);
-        mayorEdad.setBounds(30,30,400,22);
-        cancelar.setBounds(25, 90, 90,22);
-        reserva.setBounds(145, 90, 90, 22);
+        ced=cedula;
+        this.vuelo=vuelo;
+        this.setBounds(100, 300, 400, 150);
+        text.setBounds(10,5,300,22);
+        text1.setBounds(10, 20, 350, 22);
+        mayorEdad.setBounds(30,40,400,22);
+        cancelar.setBounds(25, 80, 90,22);
+        reserva.setBounds(145, 80, 90, 22);
         //setInformation
-        this.setTitle("Reserva para " + cedula);
-        text.setText(vuelo.datosVuelo());
+        this.setTitle("Reserva para " + ced);
+        text.setText("Costo Reserva: "+ costoVuelo(vuelo));
+        text1.setText("Vuelo: "+vuelo.datosVuelo());
         mayorEdad.setText("Soy Mayor de Edad");
         cancelar.setText("Volver");
         reserva.setText("reservar");
         //addThis
         this.add(text);
+        this.add(text1);
         this.add(mayorEdad);
         this.add(cancelar);
         this.add(reserva);
         //changeVisible
         text.setVisible(true);
-        text1.setVisible(false);
+        text1.setVisible(true);
         mayorEdad.setVisible(true);
         cancelar.setVisible(true);
         reserva.setVisible(true);
@@ -56,18 +63,45 @@ public class ConfirmarReserva extends JFrame implements ActionListener{
         reserva.addActionListener(this);
     }
     
+    public String costoVuelo(Vuelo vuelo){
+        String costo="sin costo asignado";
+        Calendar fecha=vuelo.getFecha();
+        if(fecha.get(Calendar.DAY_OF_WEEK) == 0){
+            if(fecha.get(Calendar.AM_PM)==Calendar.PM){
+                costo="domingo en la tarde";
+            }
+            else{
+                costo="domingo en la mañana";
+            }
+        }
+        else{
+            if(fecha.get(Calendar.AM_PM)==Calendar.PM){
+                costo="otro dia en la tarde";
+            }
+            else{
+                costo="otro dia en la mañana";
+            }
+        }
+        return costo;
+    }
+    
       @Override
     public void actionPerformed(ActionEvent e) {     
         if(e.getSource()==mayorEdad){
-            reserva.setEnabled(true);
+            if(mayorEdad.isSelected()==true)
+                reserva.setEnabled(true);
+            else
+                reserva.setEnabled(false);
         }
-        else
-            reserva.setEnabled(false);
         if(e.getSource()==cancelar){
             this.dispose();
             TechFly.consultarVuelos();
         }
-        if(e.getSource()==reserva)
+        if(e.getSource()==reserva){
+            TechFly.getListaReservas().agregarReserva(vuelo, ced);
+            JOptionPane.showMessageDialog(this, "Reserva Confirmada con Exito", "Vuelo Reservado", JOptionPane.PLAIN_MESSAGE);
             this.dispose();
+            TechFly.consultarVuelos();
+        }
     }
 }

@@ -43,69 +43,80 @@ public class TechFly{
     public static void inicializarVuelos(){
         Calendar fecha=Calendar.getInstance();
         String id,origen,destino;
-        for(int i=0;i<11;i++){
-            fecha.set(Calendar.DATE,(Calendar.DATE + i));
+        for(int i=10;i<30;i++){
             if(i%2!=0)
                 id="AV"+fecha.get(Calendar.DAY_OF_WEEK_IN_MONTH);
             else
                 id="VC"+fecha.get(Calendar.DAY_OF_MONTH);
             switch (i){
-                case 1:
+                case 10:
                     origen="Panama";
                     destino="Medellin";
                     id+="PAME";
+                    fecha.set(Calendar.DAY_OF_MONTH,(10));
                     break;
-                case 2:
+                case 12:
                     origen="Peru";
                     destino="Medellin";
                     id+="PEME";
+                    fecha.set(Calendar.DAY_OF_MONTH,(12));
                     break;
-                case 3:
+                case 13:
                     origen="Chile";
                     destino="Bogota";
                     id+="CBOG";
+                    fecha.set(Calendar.DAY_OF_MONTH,(13));
                     break;
-                case 4:
+                case 14:
                     origen="Bogota";
                     destino="Medellin";
                     id+="BOGME";
+                    fecha.set(Calendar.DAY_OF_MONTH,(14));
                     break;
-                case 5:
+                case 15:
                     origen="Madrid";
                     destino="Medellin";
                     id+="MME";
+                    fecha.set(Calendar.DAY_OF_MONTH,(15));
                     break;
-                case 6:
+                case 16:
                     origen="Cali";
                     destino="Medellin";
                     id+="CAME";
+                    fecha.set(Calendar.DAY_OF_MONTH,(16));
                     break;
-                case 7:
-                    origen="Mexico";
-                    destino="Medellin";
+                case 17:
+                    origen="Medellin";
+                    destino="Mexico";
                     id+="MEME";
+                    fecha.set(Calendar.DAY_OF_MONTH,(17));
                     break;
-                case 8:
+                case 18:
                     origen="Barranquilla";
                     destino="Bogota";
                     id+="BABOG";
+                    fecha.set(Calendar.DAY_OF_MONTH,(18));
                     break;
-                case 9:
+                case 19:
                     origen="Bucaramanga";
                     destino="Cali";
                     id+="BUCA";
+                    fecha.set(Calendar.DAY_OF_MONTH,(19));
                     break;
-                case 10:
+                case 20:
                     origen="Cartagena";
                     destino="Manizales";
                     id+="CARMA";
+                    fecha.set(Calendar.DAY_OF_MONTH,(20));
                     break;
                 default:
                     origen="Venezuela";
                     destino="Medellin";
                     id+="VEME";
+                    fecha.set(Calendar.DAY_OF_MONTH,(i));
                     break;
             }
+            System.out.println(fecha.getTime());
             listaVuelos.agregarVuelo(id, origen, destino, fecha);
         }
     }

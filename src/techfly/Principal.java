@@ -80,8 +80,8 @@ public class Principal extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==reserva){
-            if(cedula.getText().equals("")||cedula.getText().equals("Cedula")){
-                JOptionPane.showMessageDialog(this, "Debe ingresar una Cedula", "Error", 2);
+            if(cedula.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Debe ingresar una Cedula", "Falta informacion", 3);
             }
             else{
                 this.dispose();
@@ -90,8 +90,8 @@ public class Principal extends JFrame implements ActionListener{
         }
         
         if(e.getSource()==consulta){
-            if(cedula.getText().equals("")||cedula.getText().equals("Cedula")){
-                JOptionPane.showMessageDialog(this, "Debe ingresar una Cedula", "Error", 2);
+            if(cedula.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Debe ingresar una Cedula", "Falta informacion", 3);
             }
             else{
                 TechFly.consultarReservas(cedula.getText());

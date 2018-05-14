@@ -55,7 +55,7 @@ public class MisReservas extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {     
         if(e.getSource()==consulta){
             if(buscarConCedula.getText().equals("")){
-                JOptionPane.showMessageDialog(this, "Debe ingresar una cedula", "Error", 3);
+                JOptionPane.showMessageDialog(this, "Debe ingresar una cedula", "Falta informacion", 3);
             }
             else{
                 this.dispose();
