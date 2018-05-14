@@ -21,6 +21,7 @@ public class Vuelo {
         this.id = id;
         this.origen = origen;
         this.destino = destino;
+        this.fecha = Calendar.getInstance();
         this.fecha = fecha;
         proximo=null;
     }
@@ -38,7 +39,7 @@ public class Vuelo {
     }
 
     public Calendar getFecha() {
-        return fecha;
+        return this.fecha;
     }
 
     public Vuelo getProximo() {
@@ -51,7 +52,7 @@ public class Vuelo {
     
     public String datosVuelo(){
         String datos="";
-        datos+=origen+" a "+destino+", Salida "+fecha.getTime()+".";
+        datos+=origen+" a "+destino+", Salida "+this.fecha.getTime()+".";
         return datos;
     }
 }

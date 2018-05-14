@@ -25,10 +25,21 @@ public class ConfirmarReserva extends JFrame implements ActionListener{
         this.setLayout(null);
     }
     
-    public void reserva(String cedula, Vuelo vuelo){
+    public void reserva(String cedula,Vuelo vuelo){
+        if(puedeReservar(cedula)){
+            ced=cedula;
+            this.vuelo=vuelo;
+            confirmarReserva();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Usted ya realizo una reserva el dia de hoy", "Lo Sentimos", JOptionPane.INFORMATION_MESSAGE);
+            TechFly.consultarVuelos();
+        }
+    }
+    
+    public void confirmarReserva(){
         //setBounds
-        ced=cedula;
-        this.vuelo=vuelo;
+        
         this.setBounds(100, 300, 400, 150);
         text.setBounds(10,5,300,22);
         text1.setBounds(10, 20, 350, 22);
@@ -63,26 +74,37 @@ public class ConfirmarReserva extends JFrame implements ActionListener{
         reserva.addActionListener(this);
     }
     
-    public String costoVuelo(Vuelo vuelo){
-        String costo="sin costo asignado";
+    public float costoVuelo(Vuelo vuelo){
+        float costo;
         Calendar fecha=vuelo.getFecha();
-        if(fecha.get(Calendar.DAY_OF_WEEK) == 0){
-            if(fecha.get(Calendar.AM_PM)==Calendar.PM){
-                costo="domingo en la tarde";
+        if(fecha.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || fecha.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY){
+            if(fecha.get(Calendar.AM_PM)==Calendar.AM){
+                costo=559000;
             }
             else{
-                costo="domingo en la mañana";
+                costo=499000;
             }
         }
         else{
-            if(fecha.get(Calendar.AM_PM)==Calendar.PM){
-                costo="otro dia en la tarde";
+            if(fecha.get(Calendar.AM_PM)==Calendar.AM){
+                costo=429000;
             }
             else{
-                costo="otro dia en la mañana";
+                costo=399000;
             }
         }
         return costo;
+    }
+    
+    private boolean puedeReservar(String cedula){
+        boolean puede=false;
+        Calendar hoy=Calendar.getInstance();
+        Reserva ultima=TechFly.getListaReservas().buscarUltimaReserva(cedula);
+        if(ultima==null)
+            puede=true;
+        if(ultima!=null && ultima.getIdCliente().equals(cedula) && ultima.getTime().get(Calendar.DAY_OF_MONTH)!=hoy.get(Calendar.DAY_OF_MONTH))
+            puede=true;
+        return puede;
     }
     
       @Override

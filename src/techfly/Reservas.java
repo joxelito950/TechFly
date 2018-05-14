@@ -47,4 +47,14 @@ public class Reservas{
          }
         return listado;
      }
+     
+     public Reserva buscarUltimaReserva(String cedula){
+        Reserva recorre = listadoReservas;
+        while(recorre!=null){
+            if(recorre.getIdCliente().equals(cedula))
+                break;
+            recorre=recorre.getSigReserva();
+        }
+        return recorre;
+    }
 }
