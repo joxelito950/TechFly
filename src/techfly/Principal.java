@@ -67,33 +67,17 @@ public class Principal extends JFrame implements ActionListener{
         cerrar.setVisible(true);
         this.setVisible(true);
         //action
-        cedula.addActionListener(this);
+        cedula.selectAll();
         consulta.addActionListener(this);
         reserva.addActionListener(this);
         cerrar.addActionListener(this);
     }
-    public void error(){
-        this.dispose();
-        this.setBounds(300, 360, 200, 100);
-        text.setBounds(10,5,200,22);
-        volver.setBounds(10,25,89,22);
-        this.setTitle("Error");
-        text.setText("Debe ingresar una cedula");
-        volver.setText("Volver");
-        this.add(text);
-        this.add(volver);
-        text.setVisible(true);
-        volver.setVisible(true);
-        this.setVisible(true);
-        volver.addActionListener(this);
-    }
           
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.setVisible(false);
         if(e.getSource()==reserva){
             if(cedula.getText().equals("")||cedula.getText().equals("Cedula")){
-                error();
+                JOptionPane.showMessageDialog(this, "Debe ingresar una Cedula", "Error", 2);
             }
             else{
                 this.dispose();
@@ -103,8 +87,7 @@ public class Principal extends JFrame implements ActionListener{
         
         if(e.getSource()==consulta){
             if(cedula.getText().equals("")||cedula.getText().equals("Cedula")){
-                this.dispose();
-                error();
+                JOptionPane.showMessageDialog(this, "Debe ingresar una Cedula", "Error", 2);
             }
             else{
                 TechFly.consultarReservas(cedula.getText());
@@ -116,4 +99,5 @@ public class Principal extends JFrame implements ActionListener{
         if(e.getSource()==cerrar)
             this.dispose();
     }   
+
 }
