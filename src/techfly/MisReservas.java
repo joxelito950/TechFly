@@ -63,14 +63,19 @@ public class MisReservas extends JFrame implements ActionListener{
             }            
         }
         if(e.getSource()==volver){
-                TechFly.consultarVuelos();
-                this.dispose();
+                 this.dispose();
+                TechFly.consultarVuelos(); 
             }
     }
     
     private void inicializar(Reservas lista,String id){
         listado.removeAll();
         Reserva recorreR=lista.getInicio();
+        while(recorreR!=null){
+            if(recorreR.getIdCliente().equals(id))
+                break;
+            recorreR=recorreR.getSigReserva();
+        }
         if(recorreR==null){
             //setBounds
             this.setBounds(250,300,250,150);
@@ -86,7 +91,7 @@ public class MisReservas extends JFrame implements ActionListener{
         }
         else{
             //setBounds
-            this.setBounds(250,300,340,200);
+            this.setBounds(250,300,340,190);
             text.setBounds(10,5,200,22);
             listado.setBounds(10, 25, 300, 22);
             text1.setBounds(10,50,220,22);
