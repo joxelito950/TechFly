@@ -27,25 +27,13 @@ public class Reservas{
      }
      
      public void agregarReserva(Reserva reserva){
-         Reserva nuevo = reserva;
         if(listadoReservas!=null)
-          nuevo.setSigReserva(listadoReservas);
-        listadoReservas=nuevo;
+          reserva.setSigReserva(listadoReservas);
+        listadoReservas=reserva;
      }
      
      public Reserva getInicio(){
          return listadoReservas;
-     }
-     
-     public Reservas buscarReservas(String cedula){
-        Reservas listado=new Reservas(); 
-        Reserva recorre=listadoReservas;
-        while(recorre!=null){
-            if(recorre.getIdCliente().equals(cedula))
-                 listado.agregarReserva(recorre);
-            recorre=recorre.getSigReserva();
-         }
-        return listado;
      }
      
      public Reserva buscarUltimaReserva(String cedula){

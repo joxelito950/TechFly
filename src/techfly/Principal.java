@@ -30,7 +30,7 @@ public class Principal extends JFrame implements ActionListener{
     
     public void consulta(Vuelos lista){
         //setBounds
-        this.setBounds(300, 350, 340, 160);
+        this.setBounds(250, 350, 340, 160);
         text.setBounds(10,5,200,22);
         listado.setBounds(10, 25, 300, 22);
         text1.setBounds(20,55,50,22);
@@ -43,6 +43,7 @@ public class Principal extends JFrame implements ActionListener{
         text.setText("Vuelos Disponibles");
         Calendar fecha = Calendar.getInstance();
         Vuelo recorre=lista.getInicio();
+        listado.removeAll();
         while(recorre!=null){
             if(recorre.getFecha().get(Calendar.DAY_OF_MONTH)>=fecha.get(Calendar.DAY_OF_MONTH))
                 listado.addItem(recorre.datosVuelo());

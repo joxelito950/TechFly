@@ -26,8 +26,8 @@ public class MisReservas extends JFrame implements ActionListener{
         this.setLayout(null);
     }
     
-    public void ConsultaReservas(Reservas lista){
-        inicializar(lista);
+    public void ConsultaReservas(Reservas lista,String cedula){
+        inicializar(lista,cedula);
         //setInformation
         text1.setText("Ingrese otro documento");
         buscarConCedula.setText("");
@@ -68,12 +68,12 @@ public class MisReservas extends JFrame implements ActionListener{
             }
     }
     
-    private void inicializar(Reservas lista){
+    private void inicializar(Reservas lista,String id){
         listado.removeAll();
         Reserva recorreR=lista.getInicio();
         if(recorreR==null){
             //setBounds
-            this.setBounds(200,300,250,150);
+            this.setBounds(250,300,250,150);
             text.setBounds(20,5,200,22);
             text1.setBounds(20,25,200,22);
             buscarConCedula.setBounds(20, 50, 100, 22);
@@ -86,9 +86,9 @@ public class MisReservas extends JFrame implements ActionListener{
         }
         else{
             //setBounds
-            this.setBounds(200,300,240,200);
+            this.setBounds(250,300,340,200);
             text.setBounds(10,5,200,22);
-            listado.setBounds(10, 25, 200, 22);
+            listado.setBounds(10, 25, 300, 22);
             text1.setBounds(10,50,220,22);
             buscarConCedula.setBounds(10, 70, 100, 22);
             consulta.setBounds(15, 100, 89,22);
@@ -98,7 +98,7 @@ public class MisReservas extends JFrame implements ActionListener{
             text.setText("Sus Vuelos Reservados");
             Calendar fecha = Calendar.getInstance();
             while(recorreR!=null){
-                if(recorreR.getVuelo().getFecha().get(Calendar.DAY_OF_MONTH)>=fecha.get(Calendar.DAY_OF_MONTH)){
+                if(recorreR.getIdCliente().equals(id) && recorreR.getVuelo().getFecha().get(Calendar.DAY_OF_MONTH)>=fecha.get(Calendar.DAY_OF_MONTH)){
                     Vuelo aux=recorreR.getVuelo();
                     listado.addItem(aux.datosVuelo()+", Reservado "+aux.getFecha());
                 }

@@ -40,7 +40,7 @@ public class ConfirmarReserva extends JFrame implements ActionListener{
     public void confirmarReserva(){
         //setBounds
         
-        this.setBounds(100, 300, 400, 150);
+        this.setBounds(250, 300, 400, 150);
         text.setBounds(10,5,300,22);
         text1.setBounds(10, 20, 350, 22);
         mayorEdad.setBounds(30,40,400,22);
@@ -121,6 +121,7 @@ public class ConfirmarReserva extends JFrame implements ActionListener{
         }
         if(e.getSource()==reserva){
             TechFly.getListaReservas().agregarReserva(vuelo, ced);
+            TechFly.salvarReservas();
             JOptionPane.showMessageDialog(this, "Reserva Confirmada con Exito", "Vuelo Reservado", JOptionPane.PLAIN_MESSAGE);
             this.dispose();
             TechFly.consultarVuelos();

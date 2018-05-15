@@ -21,6 +21,7 @@ public class Reserva {
         this.vuelo = vuelo;
         this.idCliente = idCliente;
         this.reserva = Calendar.getInstance();
+        sigReserva=null;
     }
 
     public Vuelo getVuelo() {
@@ -41,6 +42,9 @@ public class Reserva {
 
     public Calendar getTime() {
         return reserva;
+    }
+    public void setTime(Calendar fechaReserva){
+        this.reserva=fechaReserva;
     }
 
     public Reserva getSigReserva() {

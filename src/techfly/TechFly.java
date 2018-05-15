@@ -5,6 +5,7 @@
  */
 package techfly;
 import java.util.*;
+import java.io.*;
 /**
  *
  * @author jose-
@@ -33,7 +34,7 @@ public class TechFly{
     }
     
     public static void consultarReservas(String cedula){
-        consultaReservas.ConsultaReservas(listaReservas.buscarReservas(cedula));
+        consultaReservas.ConsultaReservas(listaReservas,cedula);
     }
     
     public static void reservar(String cedula,Vuelo vuelo){
@@ -111,8 +112,91 @@ public class TechFly{
         }
     }
     
+    public static void inicializarReservas(){
+      try {
+      FileReader fr = new FileReader("C:/Users/jose-/OneDrive/Documentos/GitHub/TechFly/test/reservas.txt");
+      BufferedReader br = new BufferedReader(fr);
+      String idCliente,idVuelo,origen,destino,mes,dia,hora,minuto,año;
+      Vuelo reservado;
+      Calendar fecha=Calendar.getInstance();
+      Reserva nuevo;
+      while((idCliente = br.readLine()) != null){
+          idVuelo=br.readLine();
+          origen=br.readLine();
+          destino=br.readLine();
+          mes=br.readLine();
+          dia=br.readLine();
+          hora=br.readLine();
+          minuto=br.readLine();
+          año=br.readLine();
+          fecha.set(Integer.parseInt(año), Integer.parseInt(mes), Integer.parseInt(dia), Integer.parseInt(hora), Integer.parseInt(minuto));
+          reservado=new Vuelo(idVuelo,origen,destino,fecha);
+          nuevo=new Reserva(reservado, idCliente);
+          mes=br.readLine();
+          dia=br.readLine();
+          hora=br.readLine();
+          minuto=br.readLine();
+          año=br.readLine();
+          fecha.set(Integer.parseInt(año), Integer.parseInt(mes), Integer.parseInt(dia), Integer.parseInt(hora), Integer.parseInt(minuto));
+          nuevo.setTime(fecha);
+          listaReservas.agregarReserva(nuevo);
+      }
+      fr.close();
+    }
+    catch(Exception e) {
+      System.out.println("No se recuperaron las reservas: " + e.getMessage());
+    }
+
+    }
+    
+    public static void salvarReservas(){
+        if(listaReservas!=null){
+            Reserva recorre=listaReservas.getInicio();
+            Vuelo reservado;
+            Calendar fecha;
+            FileWriter fichero = null;
+            PrintWriter pw = null;
+            try
+            {
+                fichero = new FileWriter("C:/Users/jose-/OneDrive/Documentos/GitHub/TechFly/test/reservas.txt");
+                pw = new PrintWriter(fichero);
+                while(recorre!=null){
+                    pw.println(recorre.getIdCliente());
+                    reservado=recorre.getVuelo();
+                    pw.println(reservado.getId());
+                    pw.println(reservado.getOrigen());
+                    pw.println(reservado.getDestino());
+                    fecha=reservado.getFecha();
+                    pw.println(fecha.get(Calendar.MONTH));
+                    pw.println(fecha.get(Calendar.DAY_OF_MONTH));
+                    pw.println(fecha.get(Calendar.HOUR));
+                    pw.println(fecha.get(Calendar.MINUTE));
+                    pw.println(fecha.get(Calendar.YEAR));
+                    fecha=recorre.getTime();
+                    pw.println(fecha.get(Calendar.MONTH));
+                    pw.println(fecha.get(Calendar.DAY_OF_MONTH));
+                    pw.println(fecha.get(Calendar.HOUR));
+                    pw.println(fecha.get(Calendar.MINUTE));
+                    pw.println(fecha.get(Calendar.YEAR));
+                    recorre=recorre.getSigReserva();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                if (null != fichero)
+                   fichero.close();
+                } 
+                catch (IOException e2) {
+                   e2.printStackTrace();
+                }
+            }
+        }
+    }
+    
     public static void main(String args[]) {
         inicializarVuelos();
+        inicializarReservas();
         consultarVuelos();
     }
     
